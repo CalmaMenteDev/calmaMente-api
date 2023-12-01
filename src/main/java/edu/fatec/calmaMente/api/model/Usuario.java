@@ -24,7 +24,7 @@ public class Usuario {
     private String dataNascimento;
     private String cpf;
     private String senha;
-    // @ManyToMany(targetEntity=Transtorno.class)
+    @ManyToMany(targetEntity=Transtorno.class)
     // @JoinTable(
     //     name = "usuario_transtorno",
     //     joinColumns = {
@@ -36,7 +36,7 @@ public class Usuario {
     //     inverseForeignKey = @ForeignKey(name = "fk_usuario_transtorno_transtorno"),
     //     uniqueConstraints = @UniqueConstraint(columnNames = {"usuario_id", "transtorno_id"})
     // )
-    // private Set<Transtorno> transtornoSet;
+    private Set<Transtorno> transtornoSet;
 
     public void setId(Integer id) {
         this.id = id;

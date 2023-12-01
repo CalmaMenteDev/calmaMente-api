@@ -11,6 +11,8 @@ public class Transtorno {
     private Integer id;
     private String titulo;
     private String descricao;
+    //@ManyToMany(targetEntity=Transtorno.class)
+    //private Set<Usuario> usuarios;
 
     public Integer getId() {
         return id;

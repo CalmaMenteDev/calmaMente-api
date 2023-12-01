@@ -53,13 +53,17 @@ public class UsuarioController {
     }
 
     @PostMapping(path = {"/login"})
-    public List findByNome(@RequestBody String cpf) {
-        
+    public List<Usuario> findByNome(@RequestBody Usuario usuario) {
         //String cpf = "123";
-        String query = "SELECT u FROM Usuario u WHERE u.cpf = :cpf";
-        TypedQuery<Usuario> TypedQuery = em.createQuery(query, Usuario.class);
-        TypedQuery.setParameter("cpf", cpf);
-        return TypedQuery.getResultList();
+        System.out.println(usuario.getCpf());
+        System.out.println(usuario.getSenha());
+        System.exit(1);
+        return null;
+        //String query = "SELECT u FROM Usuario u WHERE u.cpf =" + cpf;
+        //System.out.println(cpf);
+        //TypedQuery<Usuario> TypedQuery = em.createQuery(query, Usuario.class);
+        //TypedQuery.setParameter("cpf", cpf);
+        //return TypedQuery.getResultList();
     }
 
     @PutMapping(value="/{id}")
