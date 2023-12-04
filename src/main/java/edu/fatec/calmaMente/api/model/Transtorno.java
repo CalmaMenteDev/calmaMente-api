@@ -1,6 +1,8 @@
 package edu.fatec.calmaMente.api.model;
 
 import javax.persistence.*;
+
+import java.util.Set;
 import java.util.Set;
 
 @Entity
@@ -11,8 +13,11 @@ public class Transtorno {
     private Integer id;
     private String titulo;
     private String descricao;
-    //@ManyToMany(targetEntity=Transtorno.class)
-    //private Set<Usuario> usuarios;
+    @ManyToMany(mappedBy = "transtornos")
+    private Set<Usuario> usuarios;
+    
+    @ManyToMany(mappedBy = "transtornos")
+    private Set<Artigo> artigos;
 
     public Integer getId() {
         return id;
@@ -36,5 +41,17 @@ public class Transtorno {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    // public Set<Usuario> getUsuarios() {
+    //     return usuarios;
+    // }
+
+    public void setUsuarios(Usuario usuario) {
+        this.usuarios.add(usuario);
+    }
+
+    public void setArtigos(Artigo artigo) {
+        this.artigos.add(artigo);
     }
 }

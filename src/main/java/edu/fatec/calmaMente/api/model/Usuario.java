@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -24,20 +25,19 @@ public class Usuario {
     private String dataNascimento;
     private String cpf;
     private String senha;
-    @ManyToMany(targetEntity=Transtorno.class)
-    // @JoinTable(
-    //     name = "usuario_transtorno",
-    //     joinColumns = {
-    //         @JoinColumn(name = "usuario_id", referencedColumnName = "id"),
-    //         @JoinColumn(name = "transtorno_id", referencedColumnName = "id")
+    @ManyToMany
+    @JoinTable(
+        name = "usuario_transtorno",
+        //uniqueConstraints = @UniqueConstraint(columnNames = {"usuario_id", "transtorno_id"}),
+        joinColumns = @JoinColumn(name = "usuario_id"),
+        inverseJoinColumns = @JoinColumn(name = "transtorno_id")
+    )
+    private Set<Transtorno> transtornos;
 
-    //     },
-    //     foreignKey = @ForeignKey(name = "fk_usuario_transtorno_usuario"),
-    //     inverseForeignKey = @ForeignKey(name = "fk_usuario_transtorno_transtorno"),
-    //     uniqueConstraints = @UniqueConstraint(columnNames = {"usuario_id", "transtorno_id"})
-    // )
-    private Set<Transtorno> transtornoSet;
-
+    public Integer getId() {
+        return id;
+    }
+    
     public void setId(Integer id) {
         this.id = id;
     }
@@ -72,5 +72,13 @@ public class Usuario {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public void setTranstornos(Transtorno transtornos) {
+        this.transtornos.add(transtornos);
+    }
+
+    public Set<Transtorno> getTranstornos() {
+        return transtornos;
     }
 }
